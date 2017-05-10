@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Car Park";
+}
+<div class="container-fluid" ng-app="CarParkApp" ng-controller="CarParkController">
+   <!-- <form> ng-submit="SendHttpPostData()"-->
+        <hr />
+        <div class="panel panel-default" ng-form="carparkform">
+            <div class="panel-heading">
+                <h3 class="panel-title">Calculate Car Park Price</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-md-2"><label>Entry Date & Time:</label></div>
+                    <div class="col-md-3"><input type="text" placeholder="Entry Date" ng-model="Vehicle.ParkingStartDate" cc-date-picker name="EntryDate" class="datepicker form-control" required /></div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" placeholder="Hr(0-23)" name="EntryTimeHr" ng-model="Vehicle.EntryTimeHr" min="0" max="23" required>
+                        <input type="number" class="form-control" placeholder="Min(0-59)" name="EntryTimeMn" ng-model="Vehicle.EntryTimeMn" min="0" max="59" required>
+                    </div>
+                    <span class="label label-danger" ng-show="carparkform.EntryDate.$error.required">Enter Entry Date</span>
+                    <span class="label label-danger" ng-show="!carparkform.EntryTimeHr.$valid">Invalid Entry Time(Hour)</span>
+                    <span class="label label-danger" ng-show="!carparkform.EntryTimeMn.$valid">Invalid Entry Time(Minute)</span>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2"><label>Exit Date & Time:</label></div>
+                    <div class="col-md-3"><input type="text" name="ExitDate" placeholder="Exit Date" cc-date-picker ng-model="Vehicle.ParkingEndDate" class="datepicker form-control" required /></div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" placeholder="Hr(0-23)" name="ExitTimeHr" ng-model="Vehicle.ExitTimeHr" min="0" max="23" required>
+                        <input type="number" class="form-control" placeholder="Min(0-59)" name="ExitTimeMn" ng-model="Vehicle.ExitTimeMn" min="0" max="59" required>
+                    </div>
+                    <span class="label label-danger" ng-show="carparkform.ExitDate.$error.required">Enter Exit Date</span>
+                    <span class="label label-danger" ng-show="!carparkform.ExitTimeHr.$valid">Invalid Exit Time(Hour)</span>
+                    <span class="label label-danger" ng-show="!carparkform.ExitTimeMn.$valid">Invalid Exit Time(Minute)</span>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <input type="button" ng-click="SaveData()" class="btn btn-success" ng-disabled="!carparkform.$valid" value="Calculate Parking Price" />
+                    </div>
+                    <div class="col-md-2 alert alert-info" ng-show="rate">
+                        Parking Fee: $<span class="label label-success">{{rate}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @*</form>*@
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Price Table</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Name of the rate</td>
+                            <td>Type</td>
+                            <td>Total Price</td>
+                            <td>Entry Condition</td>
+                            <td>Exit Condition</td>
+                            <td style="width:20%;">Note</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Early Bird</td>
+                            <td>Flat Rate</td>
+                            <td>$13.00</td>
+                            <td>Enter between 6:00 AM to 9:00 AM </td>
+                            <td>Exit between 3:30 PM to 11:30 PM</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Rate Night</td>
+                            <td>Flat Rate</td>
+                            <td>$6.50</td>
+                            <td>Enter between 6:00 PM to midnight (weekdays)</td>
+                            <td>Exit before 6 AM the following day</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Weekend Rate</td>
+                            <td>Flat Rate</td>
+                            <td>$10.00</td>
+                            <td>Enter anytime past midnight on Friday to Sunday </td>
+                            <td>Exit any time before midnight of Sunday </td>
+                            <td>If a patron enters the carpark before midnight on Friday and if they qualify for Night rate on a Saturday morning, then the program should charge the night rate instead of weekend rate.  </td>
+                        </tr>
+                        <tr>
+                            <td>Standard Rate</td>
+                            <td>Hourly Rate</td>
+                            <td colspan="4">
+                                0 – 1 hours $5.00 <br />
+                                1 – 2 hours $10.00 <br />
+                                2 – 3 hours $15.00 <br />
+                                3 + hours $20.00 flat rate for each calendar day of parking.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>

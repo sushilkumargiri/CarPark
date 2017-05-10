@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0-*",
+  "testRunner": "xunit",
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Microsoft.NETCore.App": {
+      "version": "1.1.1",
+      "type": "platform"
+    },
+    "BL": {
+      "version": "1.0.0-*",
+      "target": "project"
+    },
+    "xunit": "2.2.0"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [ "dnxcore50", "portable-net45+win8" ]
+    }
+  }
+
+}
